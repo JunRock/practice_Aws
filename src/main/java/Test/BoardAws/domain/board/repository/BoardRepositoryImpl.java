@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
-
 import static Test.BoardAws.domain.board.entity.QBoard.board;
 
 @Repository

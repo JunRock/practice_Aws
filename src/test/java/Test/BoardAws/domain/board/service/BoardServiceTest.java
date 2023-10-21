@@ -5,6 +5,7 @@ import Test.BoardAws.auth.service.LoginAuthService;
 import Test.BoardAws.domain.board.dto.BoardRequestDto;
 import Test.BoardAws.domain.board.dto.BoardResponseDto;
 import Test.BoardAws.domain.board.entity.Board;
+import Test.BoardAws.domain.board.entity.QBoard;
 import Test.BoardAws.domain.board.repository.BoardRepository;
 import Test.BoardAws.domain.user.repository.UserRepository;
 import Test.BoardAws.domain.user.service.UserService;
@@ -33,6 +34,7 @@ class BoardServiceTest {
     UserRepository userRepository;
     @Autowired
     LoginAuthService authService;
+
 
     @BeforeEach
     public void deleteUser(){
@@ -76,7 +78,7 @@ class BoardServiceTest {
                 .title("수정제목")
                 .build();
 
-        boardService.update(14L,build);
+        boardService.boardUpdate(1L,build);
         //then
         assertThat("수정").isEqualTo(build.getContent());
         assertThat("수정제목").isEqualTo(build.getTitle());

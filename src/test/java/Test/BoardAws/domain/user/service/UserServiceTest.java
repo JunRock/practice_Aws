@@ -38,9 +38,9 @@ class UserServiceTest {
                 .build();
 
         UserDto build2 = UserDto.builder()
-                .email("email")
+                .email("email1")
                 .password("password")
-                .nickname("nickname")
+                .nickname("nickname1")
                 .build();
 
 
@@ -48,7 +48,7 @@ class UserServiceTest {
         userService.signup(build1);
         userService.signup(build2);
         //then
-        fail("중복 회원");
+        assertThat(userRepository.count()).isEqualTo(2);
     }
 
     @Test

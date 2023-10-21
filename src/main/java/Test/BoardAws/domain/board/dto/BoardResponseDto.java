@@ -15,9 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 public class BoardResponseDto {
-    public BoardResponseDto(JdbcTemplate template) {
-
-    }
 
     private String title;
     private String content;

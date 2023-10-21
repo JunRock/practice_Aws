@@ -25,7 +25,6 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final UserService userService;
     private final BoardRepositoryImpl repository;
-
     public Long write(BoardRequestDto requestDto,String email){
         User user=userService.findUser(email);
         return boardRepository.save(requestDto.toEntity(user)).getBoardId();
@@ -38,7 +37,7 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    public String update(Long boardId, BoardRequestDto requestDto) {
+    public String boardUpdate(Long boardId, BoardRequestDto requestDto) {
         Board board = getBoard(boardId);
         User user=userService.findUser(SecurityUtil.getCurrentUsername());
         if(board.getUser().getUserId()==user.getUserId()){
@@ -49,12 +48,7 @@ public class BoardService {
             return "글을 작성한 유저가 아니므로 수정할 수 없습니다.";
     }
 
-    private Board getBoard(Long boardId) {
-        return boardRepository.findById(boardId).orElseThrow(()->
-                new IllegalArgumentException("존재하지 않는 게시판"));
-    }
-
-    public BoardResponseDto findBoard(Long boardId) {
+    public BoardResponseDto boardFind(Long boardId) {
         Board board=getBoard(boardId); //영속성 컨텍스트
         return new BoardResponseDto(board);
     }
@@ -63,6 +57,11 @@ public class BoardService {
         return repository.getBoardList(category).stream()
                 .map(BoardResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    private Board getBoard(Long boardId) {
+        return boardRepository.findById(boardId).orElseThrow(()->
+                new IllegalArgumentException("존재하지 않는 게시판"));
     }
 
 

@@ -35,19 +35,18 @@ public class BoardController {
 
     @PatchMapping("/board-update/{boardId}") //글 수정
     public ResponseEntity<String> updateBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto){
-        return ResponseEntity.ok(boardService.update(boardId,requestDto));
+        return ResponseEntity.ok(boardService.boardUpdate(boardId,requestDto));
     }
 
     @DeleteMapping("/delete-board/{boardId}") //글 삭제
     public String deleteBoard(@PathVariable Long boardId){
         boardRepository.deleteById(boardId);
-        ConcurrentHashMap
         return boardId+"가 삭제되었습니다!";
     }
 
     @GetMapping("/board-details/{boardId}") //글 세부 조회
     public ResponseEntity<BoardResponseDto> boardDetail(@PathVariable Long boardId){
-        return ResponseEntity.ok(boardService.findBoard(boardId));
+        return ResponseEntity.ok(boardService.boardFind(boardId));
     }
 
     @GetMapping("/category-board")
